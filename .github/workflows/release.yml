@@ -1,0 +1,45 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+env:
+  ZIP_FILE: gal_tobu.zip
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Install packages
+        run: |
+          sudo apt update
+          sudo apt install -y simutrans-makeobj
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Run Makeobj
+        run: |
+          makeobj pak128 vehicle.Gal_tobu_N100.pak ./N100/*.dat >./null
+          makeobj pak128 vehicle.Gal_Tobu500.pak ./500/*.dat >./null
+          makeobj pak128 vehicle.gal_tobu80000.pak ./80000/*.dat >./null
+          makeobj pak128 vehicle.Gal_tobu70000.pak ./70000/*.dat >./null
+        
+      - name: Archive Release
+        run: zip ${{ env.ZIP_FILE }} *.pak compat_archive/${{ github.ref_name }}/*
+        
+      - name: Upload Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ env.ZIP_FILE }}"
+          body:
+            "詳しい説明・更新履歴は[readme](readme.md)をご覧ください。
+
+            ## ${{ github.ref_name }}
+            ${{ github.event.head_commit.message }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
