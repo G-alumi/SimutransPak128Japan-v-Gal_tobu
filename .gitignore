@@ -1,5 +1,4 @@
-/*
-!readMe.md
-!thumbnail_tobu80000.png
-!*pak
-!/src
+*.zip
+*.pak
+*.apd
+*hidden*
