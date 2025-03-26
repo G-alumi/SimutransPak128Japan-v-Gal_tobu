@@ -40,7 +40,5 @@ jobs:
           artifacts: "${{ env.ZIP_FILE }}"
           body:
             "詳しい説明・更新履歴は[readme](readme.md)をご覧ください。
-
-            ## ${{ github.ref_name }}
-            ${{ github.event.head_commit.message }}"
+            "
           token: ${{ secrets.GITHUB_TOKEN }}
