@@ -27,8 +27,9 @@ jobs:
         run: |
           makeobj pak128 vehicle.Gal_tobu_N100.pak ./N100/*.dat >./null
           makeobj pak128 vehicle.Gal_Tobu500.pak ./500/*.dat >./null
-          makeobj pak128 vehicle.gal_tobu80000.pak ./80000/*.dat >./null
           makeobj pak128 vehicle.Gal_tobu70000.pak ./70000/*.dat >./null
+          makeobj pak128 vehicle.gal_tobu80000.pak ./80000/*.dat >./null
+          makeobj pak128 vehicle.Gal_tobu90000.pak ./90000/*.dat >./null
         
       - name: Archive Release
         run: zip ${{ env.ZIP_FILE }} *.pak compat_archive/${{ github.ref_name }}/*
